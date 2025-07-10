@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eKart - Simple Shopping Cart</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <header class="bg-blue-600 text-white p-4 text-center text-2xl font-bold">
+    eKart
+  </header>
+
+  <main class="flex-grow container mx-auto p-4">
+    <h2 class="text-xl font-semibold mb-4">Products</h2>
+
+    <div id="products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Products will be rendered here -->
+    </div>
+
+    <hr class="my-8" />
+
+    <h2 class="text-xl font-semibold mb-4">Shopping Cart</h2>
+    <div id="cart" class="bg-white p-4 rounded shadow">
+      <p id="empty-cart" class="text-gray-500">Your cart is empty.</p>
+      <ul id="cart-items" class="divide-y divide-gray-300"></ul>
+      <div id="cart-total" class="mt-4 font-bold text-right"></div>
+      <button id="clear-cart" class="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">Clear Cart</button>
+    </div>
+  </main>
+
+  <footer class="bg-blue-600 text-white p-4 text-center">
+    &copy; 2025 eKart. All rights reserved.
+  </footer>
+
+<script>
+  // Sample product data
+  const products = [
+    { id: 1, name: 'Wireless Headphones', price: 1500, image: 'https://via.placeholder.com/150?text=Headphones' },
+    { id: 2, name: 'Smart Watch', price: 3500, image: 'https://via.placeholder.com/150?text=Smart+Watch' },
+    { id: 3, name: 'Gaming Mouse', price: 1200, image: 'https://via.placeholder.com/150?text=Gaming+Mouse' },
+    { id: 4, name: 'Bluetooth Speaker', price: 2000, image: 'https://via.placeholder.com/150?text=Speaker' },
+    { id: 5, name: 'Laptop Backpack', price: 2500, image: 'https://via.placeholder.com/150?text=Backpack' },
+    { id: 6, name: '4K Monitor', price: 12500, image: 'https://via.placeholder.com/150?text=4K+Monitor' },
+  ];
+
+  let cart = {};
+
+  const productsContainer = document.getElementById('products');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const emptyCartMsg = document.getElementById('empty-cart');
+  const clearCartBtn = document.getElementById('clear-cart');
+
+  // Render products to page
+  function renderProducts() {
+    productsContainer.innerHTML = '';
+    products.forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.className = 'bg-white rounded shadow p-4 flex flex-col items-center';
+
+      productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="mb-4 w-32 h-32 object-cover rounded" />
+        <h3 class="text-lg font-semibold">${product.name}</h3>
+        <p class="text-blue-600 font-bold my-2">₹${product.price.toLocaleString()}</p>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-auto" data-id="${product.id}">Add to Cart</button>
+      `;
+
+      productsContainer.appendChild(productCard);
+    });
+  }
+
+  // Update cart UI
+  function renderCart() {
+    cartItems.innerHTML = '';
+
+    const cartKeys = Object.keys(cart);
+    if (cartKeys.length === 0) {
+      emptyCartMsg.style.display = 'block';
+      cartTotal.textContent = '';
+      clearCartBtn.style.display = 'none';
+      return;
+    }
+
+    emptyCartMsg.style.display = 'none';
+    clearCartBtn.style.display = 'inline-block';
+
+    let totalPrice = 0;
+    cartKeys.forEach(id => {
+      const product = products.find(p => p.id == id);
+      const qty = cart[id];
+      const itemTotal = product.price * qty;
+      totalPrice += itemTotal;
+
+      const li = document.createElement('li');
+      li.className = 'py-2 flex justify-between items-center';
+
+      li.innerHTML = `
+        <div>
+          <strong>${product.name}</strong> x ${qty}
+        </div>
+        <div>
+          ₹${itemTotal.toLocaleString()}
+          <button class="ml-4 text-red-600 hover:text-red-800" data-id="${id}" aria-label="Remove item">✕</button>
+        </div>
+      `;
+
+      cartItems.appendChild(li);
+    });
+
+    cartTotal.textContent = 'Total: ₹' + totalPrice.toLocaleString();
+  }
+
+  // Add product to cart
+  function addToCart(id) {
+    if (cart[id]) {
+      cart[id]++;
+    } else {
+      cart[id] = 1;
+    }
+    renderCart();
+  }
+
+  // Remove product from cart
+  function removeFromCart(id) {
+    if (!cart[id]) return;
+    cart[id]--;
+    if (cart[id] <= 0) {
+      delete cart[id];
+    }
+    renderCart();
+  }
+
+  // Clear cart
+  function clearCart() {
+    cart = {};
+    renderCart();
+  }
+
+  // Event listeners
+  productsContainer.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
+      addToCart(e.target.dataset.id);
+    }
+  });
+
+  cartItems.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
+      removeFromCart(e.target.dataset.id);
+    }
+  });
+
+  clearCartBtn.addEventListener('click', clearCart);
+
+  // Initial rendering
+  renderProducts();
+  renderCart();
+</script>
+
+</body>
+</html>
