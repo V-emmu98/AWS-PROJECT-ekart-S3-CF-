@@ -14,6 +14,9 @@ This project is a professional-level **static e-commerce site** that showcases t
 - **AWS CloudFront** – for CDN and HTTPS
 - **GitHub** – for version control
 
+
+![Website Screenshot](screenshot.png)
+
 ---
 
 ## 💡 Features
