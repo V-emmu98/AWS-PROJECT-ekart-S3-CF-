@@ -1,163 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eKart - Simple Shopping Cart</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> LATEST PRODUCTS </title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      border-bottom: 2px solid #444;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      background-color: #333;
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #e0e0e0;
+    }
+
+    .price {
+      font-size: 16px;
+      color: #b0b0b0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1f1f1f;
+      color: #aaa;
+      border-top: 1px solid #444;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body>
+  <header>🛒 LATEST - PRODUCTS </header>
 
-  <header class="bg-blue-600 text-white p-4 text-center text-2xl font-bold">
-    eKart
-  </header>
-
-  <main class="flex-grow container mx-auto p-4">
-    <h2 class="text-xl font-semibold mb-4">Products</h2>
-
-    <div id="products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Products will be rendered here -->
+  <div class="container">
+    <!-- Product Cards -->
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UL480_FMwebp_QL65_.jpg" alt="Samsung Galaxy M14">
+      <div class="name">Samsung Galaxy M14 5G</div>
+      <div class="price">₹11,490</div>
     </div>
 
-    <hr class="my-8" />
-
-    <h2 class="text-xl font-semibold mb-4">Shopping Cart</h2>
-    <div id="cart" class="bg-white p-4 rounded shadow">
-      <p id="empty-cart" class="text-gray-500">Your cart is empty.</p>
-      <ul id="cart-items" class="divide-y divide-gray-300"></ul>
-      <div id="cart-total" class="mt-4 font-bold text-right"></div>
-      <button id="clear-cart" class="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">Clear Cart</button>
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/81fxjeu8fdL._AC_UL480_FMwebp_QL65_.jpg" alt="Redmi 13C">
+      <div class="name">Redmi 13C 5G</div>
+      <div class="price">₹10,999</div>
     </div>
-  </main>
 
-  <footer class="bg-blue-600 text-white p-4 text-center">
-    &copy; 2025 eKart. All rights reserved.
-  </footer>
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/813o5gRW9rL._AC_UL480_FMwebp_QL65_.jpg" alt="iQOO Z9">
+      <div class="name">iQOO Z9 5G</div>
+      <div class="price">₹17,999</div>
+    </div>
 
-<script>
-  // Sample product data
-  const products = [
-    { id: 1, name: 'Wireless Headphones', price: 1500, image: 'https://via.placeholder.com/150?text=Headphones' },
-    { id: 2, name: 'Smart Watch', price: 3500, image: 'https://via.placeholder.com/150?text=Smart+Watch' },
-    { id: 3, name: 'Gaming Mouse', price: 1200, image: 'https://via.placeholder.com/150?text=Gaming+Mouse' },
-    { id: 4, name: 'Bluetooth Speaker', price: 2000, image: 'https://via.placeholder.com/150?text=Speaker' },
-    { id: 5, name: 'Laptop Backpack', price: 2500, image: 'https://via.placeholder.com/150?text=Backpack' },
-    { id: 6, name: '4K Monitor', price: 12500, image: 'https://via.placeholder.com/150?text=4K+Monitor' },
-  ];
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71G7b5QeG7L._AC_UL480_FMwebp_QL65_.jpg" alt="Realme Narzo N55">
+      <div class="name">Realme Narzo N55</div>
+      <div class="price">₹10,999</div>
+    </div>
 
-  let cart = {};
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/61amb0CfMGL._AC_UL480_FMwebp_QL65_.jpg" alt="OnePlus Nord CE 3 Lite">
+      <div class="name">OnePlus Nord CE 3 Lite 5G</div>
+      <div class="price">₹19,999</div>
+    </div>
 
-  const productsContainer = document.getElementById('products');
-  const cartItems = document.getElementById('cart-items');
-  const cartTotal = document.getElementById('cart-total');
-  const emptyCartMsg = document.getElementById('empty-cart');
-  const clearCartBtn = document.getElementById('clear-cart');
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71tCOhEigtL._AC_UL480_FMwebp_QL65_.jpg" alt="Lava Blaze 5G">
+      <div class="name">Lava Blaze 5G</div>
+      <div class="price">₹8,999</div>
+    </div>
 
-  // Render products to page
-  function renderProducts() {
-    productsContainer.innerHTML = '';
-    products.forEach(product => {
-      const productCard = document.createElement('div');
-      productCard.className = 'bg-white rounded shadow p-4 flex flex-col items-center';
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/61JS7lF2aqL._AC_UL480_FMwebp_QL65_.jpg" alt="iPhone 13">
+      <div class="name">Apple iPhone 13</div>
+      <div class="price">₹52,499</div>
+    </div>
 
-      productCard.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="mb-4 w-32 h-32 object-cover rounded" />
-        <h3 class="text-lg font-semibold">${product.name}</h3>
-        <p class="text-blue-600 font-bold my-2">₹${product.price.toLocaleString()}</p>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-auto" data-id="${product.id}">Add to Cart</button>
-      `;
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/61nzPMNY8zL._AC_UL480_FMwebp_QL65_.jpg" alt="Samsung Galaxy S24 Ultra">
+      <div class="name">Samsung Galaxy S24 Ultra</div>
+      <div class="price">₹1,29,999</div>
+    </div>
 
-      productsContainer.appendChild(productCard);
-    });
-  }
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/51v9n3gYKXL._AC_UL480_FMwebp_QL65_.jpg" alt="Motorola G73 5G">
+      <div class="name">Motorola G73 5G</div>
+      <div class="price">₹14,999</div>
+    </div>
 
-  // Update cart UI
-  function renderCart() {
-    cartItems.innerHTML = '';
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/41VG+ElI5KL._AC_UL480_FMwebp_QL65_.jpg" alt="Infinix Zero 5G">
+      <div class="name">Infinix Zero 5G 2023</div>
+      <div class="price">₹11,999</div>
+    </div>
+  </div>
 
-    const cartKeys = Object.keys(cart);
-    if (cartKeys.length === 0) {
-      emptyCartMsg.style.display = 'block';
-      cartTotal.textContent = '';
-      clearCartBtn.style.display = 'none';
-      return;
-    }
-
-    emptyCartMsg.style.display = 'none';
-    clearCartBtn.style.display = 'inline-block';
-
-    let totalPrice = 0;
-    cartKeys.forEach(id => {
-      const product = products.find(p => p.id == id);
-      const qty = cart[id];
-      const itemTotal = product.price * qty;
-      totalPrice += itemTotal;
-
-      const li = document.createElement('li');
-      li.className = 'py-2 flex justify-between items-center';
-
-      li.innerHTML = `
-        <div>
-          <strong>${product.name}</strong> x ${qty}
-        </div>
-        <div>
-          ₹${itemTotal.toLocaleString()}
-          <button class="ml-4 text-red-600 hover:text-red-800" data-id="${id}" aria-label="Remove item">✕</button>
-        </div>
-      `;
-
-      cartItems.appendChild(li);
-    });
-
-    cartTotal.textContent = 'Total: ₹' + totalPrice.toLocaleString();
-  }
-
-  // Add product to cart
-  function addToCart(id) {
-    if (cart[id]) {
-      cart[id]++;
-    } else {
-      cart[id] = 1;
-    }
-    renderCart();
-  }
-
-  // Remove product from cart
-  function removeFromCart(id) {
-    if (!cart[id]) return;
-    cart[id]--;
-    if (cart[id] <= 0) {
-      delete cart[id];
-    }
-    renderCart();
-  }
-
-  // Clear cart
-  function clearCart() {
-    cart = {};
-    renderCart();
-  }
-
-  // Event listeners
-  productsContainer.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
-      addToCart(e.target.dataset.id);
-    }
-  });
-
-  cartItems.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
-      removeFromCart(e.target.dataset.id);
-    }
-  });
-
-  clearCartBtn.addEventListener('click', clearCart);
-
-  // Initial rendering
-  renderProducts();
-  renderCart();
-</script>
-
+  <footer>&copy; 2025 eKart. All rights reserved.</footer>
 </body>
 </html>
